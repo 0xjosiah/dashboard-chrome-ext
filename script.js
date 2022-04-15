@@ -89,6 +89,7 @@ const renderTime = (hours, minutes) => {
     if(hours >= 12) amPm = 'PM'
     if(hours == 24) amPm = 'AM'
     if(hours > 12) hours -= 12
+    if(minutes < 10) minutes = `0${minutes}`
     hourSpan.innerHTML = hours
     minSpan.innerHTML = `${minutes} ${amPm}`
 }
