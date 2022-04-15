@@ -4,16 +4,38 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Akshar:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script async src="script.js"></script>
     <title>My Dashboard</title>
 </head>
 <body>
     <header>
-        <div>Crypto Prices</div>
+        <div id="crypto">
+            <div id="crypto-select">
+                <img src="" alt="" id="crypto-img">
+                <select id="crypto-name" name="crypto-name">
+                    <option value="ethereum">Ethereum</option>
+                    <option value="bitcoin">Bitcoin</option>
+                    <option value="chainlink">Chainlink</option>
+                    <option value="matic-network">Polygon</option>
+                    <option value="cardano">Cardano</option>
+                    <option value="solana">Solana</option>
+                    <option value="dogecoin">Dogecoin</option>
+                  </select>
+                  <p id="ticker"></p>
+            </div>
+            <div class="prices">
+                <p class="price-p">🎯 <span id="current-price"></span></p>
+                <p class="price-p">🔼 <span id="high-price"></span></p>
+                <p class="price-p">🔽 <span id="low-price"></span></p>
+            </div>
+        </div>
         <div>Weather</div>
     </header>
-    <main><h1>Time Here</h1></main>
+    <main class="time"><span id="hours"></span>:<span id="minutes"></span></main>
     <footer>
         <div class="background-source">Photo by:</div>
 
