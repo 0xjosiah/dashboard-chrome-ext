@@ -7,8 +7,11 @@ const lowPrice = document.querySelector('#low-price')
 const highPrice = document.querySelector('#high-price')
 const cryptoDiv = document.querySelector('#crypto')
 const cryptoImg = document.querySelector('#crypto-img')
-const hourSpan = document.querySelector('#hours')
-const minSpan = document.querySelector('#minutes')
+const time = document.querySelector('#time')
+const weather = document.querySelector('#weather')
+const temp = document.querySelector('#temp')
+const weatherIcon = document.querySelector('#weather-icon')
+const weatherLocation = document.querySelector('#location')
 const defaultBackground = {
     urls: {
         full: '../default_bckgrnd.jpg'
@@ -55,20 +58,12 @@ const getCryptoPrices = async crypto => {
     const response = await fetch(`https://api.coingecko.com/api/v3/coins/${crypto}`)
     if(!response.ok) throw Error('something went wrong')
     const data = await response.json()
-    // console.log(data)
     renderCryptoPrices(data)
 }
 
 const renderCryptoPrices = data => {
-    // console.log(data.name)
-
-    // console.log(data.tickers[0].base)
     ticker.innerHTML = data.tickers[0].base
-
-    // console.log(data.image.small)
     cryptoImg.src = data.image.small
-
-    // console.log(data.market_data.current_price.usd)
     currentPrice.innerHTML = `${data.market_data.current_price.usd} USD`
     highPrice.innerHTML = `${data.market_data.high_24h.usd} USD`
     lowPrice.innerHTML = `${data.market_data.low_24h.usd} USD`
@@ -76,29 +71,41 @@ const renderCryptoPrices = data => {
 
 const getTime = () => {
     let currentTime = new Date()
-    // console.log(currentTime)
-    let hour = currentTime.getHours()
-    // console.log(hour)
-    let minutes = currentTime.getMinutes()
-    // console.log(minutes)
-    renderTime(hour, minutes)
+    time.innerHTML = currentTime.toLocaleTimeString("en-us", {timeStyle: "short"})
 }
 
-const renderTime = (hours, minutes) => {
-    let amPm = 'AM'
-    if(hours >= 12) amPm = 'PM'
-    if(hours == 24) amPm = 'AM'
-    if(hours > 12) hours -= 12
-    if(minutes < 10) minutes = `0${minutes}`
-    hourSpan.innerHTML = hours
-    minSpan.innerHTML = `${minutes} ${amPm}`
+navigator.geolocation.getCurrentPosition(position => {
+    let lon = position.coords.longitude
+    let lat = position.coords.latitude
+    getWeather(lon, lat)
+})
+
+const getWeather = async (lon, lat) => {
+    try {
+        const res = await fetch(`https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${lat}&lon=${lon}&units=imperial`)
+        const data = await res.json()
+        renderWeather(data)
+    } catch(err) {
+        console.error(err)
+        weatherFallback()
+    }
+}
+
+const renderWeather = async data => {
+    weatherIcon.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
+    temp.innerHTML = `${data.main.temp.toFixed(0)}º`
+    weatherLocation.innerHTML = `${data.name}`
+}
+
+const weatherFallback = () => {
+    weatherIcon.src = 'http://openweathermap.org/img/wn/01n@2x.png'
+    temp.innerHTML = '--º'
+    weatherLocation.innerHTML = 'unknown'
+
 }
 
 cryptoName.addEventListener('input', () => getCryptoPrices(cryptoName.value))
 
 getBackgroundPhoto().then(renderBackground).catch(renderDefault)
 getCryptoPrices(cryptoName.value).catch(err => console.error(err))
-getTime()
-
-
-
+setInterval(getTime, 1000)

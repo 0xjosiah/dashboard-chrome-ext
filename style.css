@@ -20,13 +20,18 @@ body {
     padding: 15px;
 }
 
+img {
+    display: block;
+}
+
 header {
     display: flex;
     justify-content: space-between;
 }
 
 main {
-    text-align: center;
+    display: flex;
+    justify-content: center;
 }
 
 footer {
@@ -63,6 +68,13 @@ select {
     border: 1px solid #D1D5DB;
 }
 
+.widget {
+    background-color: rgba(98, 121, 142, 0.113);
+    backdrop-filter: blur(5px);
+    padding: 1rem;
+    border-radius: 15px;
+}
+
 .prices {
     font-size: .75em;
     display: flex;
@@ -70,24 +82,41 @@ select {
 }
 
 .price-p {
-    margin-left: 1em;
+    margin: 1em 0 0 1em;
 }
 
-.time {
+.icon {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -1em;
+    margin-left: -1em;
+}
+
+#time {
+    position: absolute;
+    left: 50%;
+    top: 50%;
     font-size: 7rem;
     font-family: 'Akshar', sans-serif;
-    margin-top: -2em;
+    transform: translate(-50%, -50%);
 }
 
-#crypto {
-    background-color: rgba(240, 248, 255, 0.113);
-    backdrop-filter: blur(5px);
-    padding: 1em;
-    border-radius: 15px;
+#temp {
+    font-family: 'Akshar', sans-serif;
+    font-size: 3rem;
+    margin: 0;
+}
+
+#location {
+    margin: 0;
+    margin-top: -1em;
+    margin-right: .2em;
+    text-align: end;
+    font-size: 1.5rem;
 }
 
 #crypto-select {
     display: flex;
     align-items: center;
-    /* flex-direction: column; */
 }

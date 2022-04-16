@@ -13,7 +13,7 @@
 </head>
 <body>
     <header>
-        <div id="crypto">
+        <div class="widget" id="crypto">
             <div id="crypto-select">
                 <img src="" alt="" id="crypto-img">
                 <select id="crypto-name" name="crypto-name">
@@ -24,8 +24,8 @@
                     <option value="cardano">Cardano</option>
                     <option value="solana">Solana</option>
                     <option value="dogecoin">Dogecoin</option>
-                  </select>
-                  <p id="ticker"></p>
+                </select>
+                <p id="ticker"></p>
             </div>
             <div class="prices">
                 <p class="price-p">🎯 <span id="current-price"></span></p>
@@ -33,12 +33,19 @@
                 <p class="price-p">🔽 <span id="low-price"></span></p>
             </div>
         </div>
-        <div>Weather</div>
+        <div id="weather" class="widget">
+            <div class="icon">
+                <img id="weather-icon" src="" alt="">
+                <p id="temp"></p>
+            </div>
+            <p id="location"></p>
+        </div>
     </header>
-    <main class="time"><span id="hours"></span>:<span id="minutes"></span></main>
+    <main>
+        <div class="widget time" id="time"></div>
+    </main>
     <footer>
-        <div class="background-source">Photo by:</div>
-
+        <div class="background-source widget">Photo by:</div>
     </footer>
 </body>
 </html>
