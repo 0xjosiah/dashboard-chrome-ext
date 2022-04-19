@@ -4,7 +4,7 @@
     "version": "1.0.0",
     "description": "Just for practicing async JS",
     "action": {
-        "default_icon": "../images/icons8-dashboard-layout-24.png"
+        "default_icon": "images/icons8-dashboard-layout-24.png"
     },
     "chrome_url_overrides": {
         "newtab": "index.html"
